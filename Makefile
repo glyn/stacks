@@ -1,15 +1,15 @@
-all: lucid64.tar.gz
+all: rhel7.tar.gz
 
-lucid64.cid: lucid64/Dockerfile
-	docker build -t cloudfoundry/lucid64 lucid64
+rhel7.cid: rhel7/Dockerfile
+	docker build -t cloudfoundry/rhel7 rhel7
 
 	# create a container to export
-	docker run -cidfile=lucid64.cid cloudfoundry/lucid64 ls
+	docker run -cidfile=rhel7.cid cloudfoundry/rhel7 ls
 
-lucid64.tar: lucid64.cid
-	docker export `cat lucid64.cid` > lucid64.tar
-	rm lucid64.cid
+rhel7.tar: rhel7.cid
+	docker export `cat rhel7.cid` > rhel7.tar
+	rm rhel7.cid
 
-lucid64.tar.gz: lucid64.tar
-	tar -C lucid64/assets -f lucid64.tar -r etc/hosts etc/timezone
-	gzip -f lucid64.tar
+rhel7.tar.gz: rhel7.tar
+	tar -C rhel7/assets -f rhel7.tar -r etc/hosts etc/timezone
+	gzip -f rhel7.tar
