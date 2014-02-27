@@ -1,4 +1,5 @@
-FROM cloudfoundry/lucid64:minbase
+#FROM cloudfoundry/rhel7:minbase
+FROM rhel7-beta-base:7.0
 
 ADD build /tmp/build
 ADD assets /tmp/assets

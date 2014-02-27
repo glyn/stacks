@@ -2,7 +2,7 @@ set -e -x
 
 #source /etc/lsb-release
 
-function yum() {
+function do_yum() {
   #apt-get -f -y --force-yes --no-install-recommends "$@"
   yum -t -y "$@"
 }
@@ -68,22 +68,24 @@ packages="
 #deb http://security.ubuntu.com/ubuntu $DISTRIB_CODENAME-security main universe multiverse
 #EOS
 
+#subscription-manager register --insecure --auto-attach
+
 # cannot upgrade udev; need --privileged during build
 #
 # see https://github.com/dotcloud/docker/pull/2979
 #echo "udev hold" | dpkg --set-selections
 
 # install gpgv so we can update
-yum install gpgv
+do_yum install gpgv
 
-yum update
+##do_yum update
 
 # upgrade upstart first to prevent it from messing up our stubs and starting daemons anyway
 #yum install upstart
 
-yum install $packages
+#do_yum install $packages
 
 #yum dist-upgrade
 
 #apt-get clean
-yum clean all
+##do_yum clean all
